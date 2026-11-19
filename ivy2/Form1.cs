@@ -25,17 +25,22 @@ namespace ivy2
         {
             string initial = salesInitial.ToUpper();
 
+
+            string displayDanielle = "Danielle: ₱0.00";
+            string displayEdward = "Edward: ₱0.00";
+            string displayFatima = "Fatima: ₱0.00";
+
             if (initial == "D")
             {
-                totalDanielle += salesAmount;
+                displayDanielle = "Danielle: ₱" + salesAmount.ToString("F2");
             }
             else if (initial == "E")
             {
-                totalEdward += salesAmount;
+                displayEdward = "Edward: ₱" + salesAmount.ToString("F2");
             }
             else if (initial == "F")
             {
-                totalFatima += salesAmount;
+                displayFatima = "Fatima: ₱" + salesAmount.ToString("F2");
             }
             else
             {
@@ -43,13 +48,9 @@ namespace ivy2
                 return;
             }
 
-            label1.Text = "";
-            label1.Text =
-                "Transaction Recorded!\n\n" +
-                "Danielle: ₱" + totalDanielle.ToString("F2") + "\n" +
-                "Edward:   ₱" + totalEdward.ToString("F2") + "\n" +
-                "Fatima:   ₱" + totalFatima.ToString("F2");
-        }  
+            label1.Text = displayDanielle + "\n" + displayEdward + "\n" + displayFatima;
+
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -59,8 +60,8 @@ namespace ivy2
                             "Fatima:   ₱" + totalFatima.ToString("F2") + "\n" +
                             "TOTAL:    ₱" + (totalDanielle + totalEdward + totalFatima).ToString("F2");
 
-            label1.Text = summary;
-            MessageBox.Show(summary, "Sales Report", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Form2 summaryForm = new Form2(totalDanielle, totalEdward, totalFatima);
+            summaryForm.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -83,6 +84,11 @@ namespace ivy2
             {
                 label1.Text = "Please enter a valid positive number for the sale amount.";
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
